@@ -1,7 +1,8 @@
 const express = require('express'); 
 const router = express.Router();    
 const jwt = require('jsonwebtoken');
-
+const dotenv = require('dotenv');
+dotenv.config();
 router.use((req, res, next) => {
     const token=req.header.authtoken;
     if (!token){
@@ -20,4 +21,4 @@ router.use((req, res, next) => {
          res.status(500).json({msg:"server error"})   
     }
 
-})
+});
