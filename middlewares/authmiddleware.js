@@ -3,17 +3,20 @@ const router = express.Router();
 const jwt = require('jsonwebtoken');
 const dotenv = require('dotenv');
 dotenv.config();
-router.use((req, res, next) => {
-    const token=req.header.authtoken;
+function authmiddleware (req, res, next){
+    const token=req.headers.authtoken;
+    console.log(req.headers)
+    console.log(token,"token");
+
     if (!token){
         res.status(401).json({msg:"no aoken was found"})
     }
     try{
-        jwt.sign(token,process.env.jwtsecret,(err,decoded)=>{
+        jwt.verify(token,process.env.jwtsecret,(err,user)=>{
             if(err){
-                res.status(401).json({msg:"token is not valid"})
+                res.status(401).json({msg:"invalid token"})
             }
-            req.user=decoded;
+            req.userdata=user;
             next();
         })
     
@@ -21,4 +24,6 @@ router.use((req, res, next) => {
          res.status(500).json({msg:"server error"})   
     }
 
-});
+};
+
+module.exports = authmiddleware;
