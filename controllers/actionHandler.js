@@ -26,14 +26,15 @@ const markassolved=asyncHandler(async(req,res,next)=>{
         const {email}=req.userdata;
         console.log(email)
         const user1=await user.findOne({email});
-        if(!user){
+        if(!user1){
             next(err);
         }else{
-            if(user1.solved.includes(questionid)){
+            if(!user1.solved.includes(questionid)){
             user1.solved.push(questionid);
             user1.save();
             res.status(200).send({ok:true,msg:"question status updated as solved"})
             }else{
+                
                 res.status(200).send({ok:false,msg:"question already solved"})
             }
         }
@@ -54,12 +55,14 @@ const markasunsolved=asyncHandler(async(req,res,next)=>{
         const {questionid}=req.body;
         const {email}=req.userdata;
         const user1=await user.findOne({email})
-        if(!user){
+        if(!user1){
             res.status(401)
             next(new Error("authentication error"))
         }else{
-            user1.solved.pull(questionid);
-            user1.save()
+            console.log(user1)
+            console.log(questionid)
+            console.log(await user.updateOne({email},{$pull:{solved:questionid}}))
+            console.log(await user.findOne({email}))
             res.status(200).send({ok:true,msg:"question status updated as unsolved"})
             }
         

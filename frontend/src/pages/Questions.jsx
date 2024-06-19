@@ -81,6 +81,7 @@ const Questions = () => {
                 loaderdispatcher({type:"FETCH_STARTED",payload:"fetching started"})
                 const respo =await axios.post(`${process.env.baseurl}/api/actions/markassolved`,{questionid},{headers:{token:AuthService.gettoken()}});
                 loaderdispatcher({type:"FETCH_SUCCESS",payload:"fetching completed"})
+                console.log(respo.data)
                 if(respo.data.ok){
                     const temparray=questions
                     temparray[index].solved=true
@@ -94,10 +95,10 @@ const Questions = () => {
             }
     }
 
-    const markAsUnSolved = async(questionsid,index)=>{
+    const markAsUnSolved = async(questionid,index)=>{
         try{
             loaderdispatcher({type:"FETCH_STARTED",payload:"fetching started"})
-            const respo =await axios.post(`${process.env.baseurl}/api/actions/markasunsolved`,{questionsid},{headers:{token:AuthService.gettoken()}});
+            const respo =await axios.post(`${process.env.baseurl}/api/actions/markasunsolved`,{questionid},{headers:{token:AuthService.gettoken()}});
             loaderdispatcher({type:"FETCH_SUCCESS",payload:"fetching completed"})
             if(respo.data.ok){
                 const temparray=questions
