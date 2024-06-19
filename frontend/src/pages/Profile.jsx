@@ -4,8 +4,10 @@ import { useEffect, useState } from "react";
 import AuthService from "../AuthService"; // Make sure this path is correct
 import { useNavigate } from "react-router-dom";
 import { useLogin } from "../context/LoginContext";
+import {useLoader} from "../context/LoaderContext"
 function Profile() {
   const { login, setLogin } = useLogin();
+  const {loader,loaderdispatcher}=useLoader()
     const [user, setUser] = useState({
         name: "",
         email: "",
@@ -22,9 +24,11 @@ function Profile() {
             try {
                 const token = AuthService.gettoken();
                 console.log(token);
+                loaderdispatcher({type:"FETCH_STARTED",payload:"fetchstarted"})
                 const response = await axios.post(`${process.env.baseurl}/api/actions/profile`, {}, {
                     headers: { token }
                 });
+                loaderdispatcher({type:"FETCH_SUCCESS",payload:"fetchended"})
                 if (response.data.ok) {
                     const temp = { ...user, ...response.data.userdata };
                     console.log(temp);
@@ -34,6 +38,7 @@ function Profile() {
                     console.log(response.data.msg);
                 }
             } catch (err) {
+                loaderdispatcher({type:"FETCH_ERROR",payload:"fetcherror"})
                 console.log(err);
             }
         };
