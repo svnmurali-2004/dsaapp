@@ -21,8 +21,9 @@ const login=asyncHandler(async(req,res,next)=>{
         if(!user1){
             res.status(400).send({ok:false,msg:"user not found"})
         }else{
-            if(bcrypt.compare(data.password,user1.password)){
-                console.log("password matched")
+            const conclusion=await bcrypt.compare(data.password,user1.password)
+            if(conclusion){
+                console.log(data.password,user1.password)
                 const token=await jwt.sign({name:data.name,email:data.email},process.env.secretkey,{expiresIn:"1h"})
                 res.status(200).send({ok:true,token:token})
             }else{
@@ -71,7 +72,7 @@ const googleauth=asyncHandler(async(req,res,next)=>{
             const token=await jwt.sign({name:data.name,email:data.email},process.env.secretkey,{expiresIn:"1h"})
             res.status(200).send({ok:true,token:token})
         }else{
-        const user2=new user({name:data.name,email:data.email,verified:true,picture:data.picture,password:Date.now().toString()})
+        const user2=new user({name:data.name,email:data.email,verified:true,picture:data.picture,password:"$2a$10$cvEFuGQHRCFHlX6aaKx8ZOg.wvEl0FmdNoL/b8KX.d2hIvwYIZJoO"})
         const respo=await user2.save()
         if(respo){
             const token=await jwt.sign({name:data.name,email:data.email},process.env.secretkey,{expiresIn:"1h"})
