@@ -1,0 +1,17 @@
+const express=require("express")
+const app=express("express")
+const cors=require("cors")
+const mongoose=require("mongoose")
+const connectDB = require("./db")
+const authmiddleware=require("./middleware/authmiddleware")
+const authRouter=require("./routes/authRouter")
+const actionsRouter=require("./routes/actionsRouter")
+require("dotenv").config()
+
+app.use(cors())
+app.use(express.json())
+app.use("/api/users/",authRouter)
+app.use("/api/actions/",actionsRouter)
+connectDB().then(()=>{
+    app.listen(5000,()=>{console.log(`server is running at port ${process.env.port}`)})
+})
