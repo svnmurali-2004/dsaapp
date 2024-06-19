@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 //@desc login user
 //@route post /api/users/login
 //@access public
@@ -29,6 +30,29 @@ const login=asyncHandler(async(req,res,next)=>{
                 res.status(400);
                 res.send({ok:false,msg:"invalid password"})
             }
+=======
+//@desc login
+//@route post /api/login
+// access public
+const bcrypt=require("bcrypt")
+const jwt=require("jsonwebtoken")
+const asyncHandler=require("express-async-handler");
+const user = require("../models/userSchema");
+require("dotenv").config();
+const login=asyncHandler(async(req,res,next)=>{
+    try{
+        const data=req.body;
+        const user1=await user.findOne({email:data.email});
+        if (!user1){
+            res.status(404).send({ok:false,msg:"user not found"})
+        }else{
+            if (bcrypt.compare(data.password,user1.hashedpassword)){
+                
+                const token =jwt.sign({name:data.name,email:data.email},process.env.jwtsecret,{expiresIn:"1h"})
+                res.send({ok:true,msg:"user found",token:token})
+            }
+            res.send({ok:false,msg:"password incorrect"})
+>>>>>>> 890b694717a7aebd94ae64fd500d7960c25e8760
         }
     }catch(err){
         res.status(500);
@@ -36,6 +60,7 @@ const login=asyncHandler(async(req,res,next)=>{
     }
 })
 
+<<<<<<< HEAD
 //@desc signup user
 //@route /api/users/signup
 //@access public
@@ -133,8 +158,33 @@ const otpverify=asyncHandler(async(req,res,next)=>{
         else{
             res.send({ok:false,msg:"otp expired"})
         }
+=======
+//@desc signup
+//@route post /api/signup
+//access public
+const signup=asyncHandler(async(req,res,next)=>{
+    try{
+        const data=req.body;
+        const user1=await user.findOne({email:data.email});
+        console.log(user1)
+        if (user1){
+            res.send({ok:false,msg:"user already exists"})
+
+        }
+        else{
+            console.log(data)
+            const hashedpassword=await bcrypt.hash(data.password,10);
+            const user2=new user({...data,hashedpassword:hashedpassword});
+            user2.save();
+            res.send({ok:true,msg:"user created"})
+        } 
+>>>>>>> 890b694717a7aebd94ae64fd500d7960c25e8760
     }catch(err){
         next(err)
     }
 })
+<<<<<<< HEAD
 module.exports={login,signup,googleauth,getotp,otpverify}
+=======
+module.exports={login,signup} 
+>>>>>>> 890b694717a7aebd94ae64fd500d7960c25e8760

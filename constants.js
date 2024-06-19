@@ -1,7 +1,16 @@
+<<<<<<< HEAD
 module.exports={
     FORBIDDEN:403,
     SERVER_ERROR:500,
     NOT_FOUND:404,
     UNAUTHORIZED:401,
     BAD_REQUEST:400,
+=======
+module.exports={FORBIDDEN:403,
+    NOT_FOUND:404,
+    VALIDATION_ERROR:400,
+    UNAUTHORIZED:401,
+    SERVER_ERROR:500,
+
+>>>>>>> 890b694717a7aebd94ae64fd500d7960c25e8760
 }
