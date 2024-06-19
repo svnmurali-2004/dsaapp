@@ -29,9 +29,13 @@ const markassolved=asyncHandler(async(req,res,next)=>{
         if(!user){
             next(err);
         }else{
+            if(user1.solved.includes(questionid)){
             user1.solved.push(questionid);
             user1.save();
             res.status(200).send({ok:true,msg:"question status updated as solved"})
+            }else{
+                res.status(200).send({ok:false,msg:"question already solved"})
+            }
         }
 
 

@@ -85,6 +85,7 @@ const Questions = () => {
                     const temparray=questions
                     temparray[index].solved=true
                     setQuestions(temparray)
+                    console.log(respo.data,"from mark as solved")
                     console.log("successfully marked as solved")
                 } 
             }catch(err){
@@ -102,6 +103,7 @@ const Questions = () => {
                 const temparray=questions
                 temparray[index].solved=false
                 setQuestions(temparray)
+                console.log(respo.data,"from mark as unsolved")
                 console.log("successfully marked as unsolved")
             }
         }catch(err){
