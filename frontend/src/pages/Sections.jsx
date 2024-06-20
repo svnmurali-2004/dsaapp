@@ -44,7 +44,7 @@ const Sections = () => {
                     <div
                         key={index}
                         onClick={()=>navigate(`/sections/${section._id}`)}
-                        className="flex flex-row justify-between items-center p-6 bg-white rounded-lg border border-gray-300 shadow-lg hover:shadow-xl transition-shadow duration-300"
+                        className="bg-gray-100 flex flex-row justify-between items-center p-6  rounded-lg border border-gray-300 shadow-lg hover:shadow-xl transition-shadow duration-300"
                     >
 
                         <h3 className="mb-4 text-lg font-semibold text-gray-700 lg:text-[30px] lg:text-bold">{section._id.charAt(0).toUpperCase()+section._id.slice(1)}</h3>
@@ -54,8 +54,8 @@ const Sections = () => {
                                 text={`${section.questionsSolved}/${section.totalQuestions}`}
                                 styles={buildStyles({
                                     textColor: '#4a4a4a',
-                                    pathColor: `rgba(62, 152, 199, ${percentage / 100})`,
-                                    trailColor: '#d6d6d6',
+                                    pathColor: `rgba(43, 181, 255, ${percentage / 100})`,
+                                    trailColor: '#E3E2E2',
                                 })}
                             />
                         </div>

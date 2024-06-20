@@ -49,7 +49,7 @@ const signup=asyncHandler(async(req,res,next)=>{
             res.status(400).send({ok:false,msg:"user aldready exits"}) 
         }else{
             const hashedpassword=await bcrypt.hash(data.password,10)
-            const user2=new user({name:data.name,email:data.email,password:hashedpassword})
+            const user2=new user({name:data.name,verified:true,email:data.email,password:hashedpassword})
             
             await user2.save()
             res.status(200).send({ok:true,msg:"sign up success"})
