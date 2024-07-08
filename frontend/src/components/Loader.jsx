@@ -11,8 +11,8 @@ const Loader = () => {
   return (
     <>
   {loaderstate.loading && (
-    <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center ">
-      <div className="relative">
+    <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center z-20 ">
+      <div className="relative z-20">
         <HashLoader color="red" loading={loaderstate.loading} size={100} />
       </div>
     </div>

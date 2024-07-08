@@ -22,7 +22,7 @@ const AboutUs = () => {
       
       <div className="mb-8 flex flex-col sm:flex-row items-center space-y-4 sm:space-y-0 sm:space-x-4 bg-white p-4 rounded-lg shadow">
         <img 
-          src="https://via.placeholder.com/150" 
+          src="https://lh3.googleusercontent.com/a/ACg8ocJ1gpO7DfuddW_RuaeqxrgZocIKrGrLKhw-xguvGlya0wxt3A=s360-c-no" 
           alt="SVN Murali" 
           className="w-32 h-32 rounded-full object-cover"
         />
@@ -37,7 +37,7 @@ const AboutUs = () => {
 
       <div className="flex flex-col sm:flex-row items-center space-y-4 sm:space-y-0 sm:space-x-4 bg-white p-4 rounded-lg shadow">
         <img 
-          src="https://via.placeholder.com/150" 
+          src="https://th.bing.com/th/id/OIP.8funejxyEw4MrTRHHNjvGwHaHa?w=166&h=180&c=7&r=0&o=5&dpr=1.3&pid=1.7" 
           alt="Sachin" 
           className="w-32 h-32 rounded-full object-cover"
         />

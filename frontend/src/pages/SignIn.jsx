@@ -10,7 +10,6 @@ import {useLogin} from '../context/LoginContext'
 const SignIn = () => {
   const {setLogin}=useLogin()
   const [formData, setFormData] = useState({
-    name: '',
     email: '',
     password: ''
   });
@@ -87,19 +86,7 @@ const SignIn = () => {
         <h2 className="text-3xl font-extrabold text-gray-900 text-center mb-4">Sign In with an account</h2>
         <form className="space-y-6" onSubmit={handleSubmit}>
           <input type="hidden" name="remember" defaultValue="true" />
-          <div>
-            <label htmlFor="name" className="sr-only">Name</label>
-            <input
-              id="name"
-              name="name"
-              type="text"
-              required
-              className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-              placeholder="Name"
-              value={formData.name}
-              onChange={handleInputChange}
-            />
-          </div>
+          
           <div>
             <label htmlFor="email-address" className="sr-only">Email address</label>
             <input
